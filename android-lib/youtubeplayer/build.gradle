@@ -34,3 +34,17 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.androidx.webkit
 }
+
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.mdakashhossain1'
+                artifactId = 'Android-YTPlayer'
+            }
+        }
+    }
+}
