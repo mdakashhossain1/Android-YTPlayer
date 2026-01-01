@@ -37,6 +37,14 @@ dependencies {
 
 apply plugin: 'maven-publish'
 
+android {
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+}
+
 afterEvaluate {
     publishing {
         publications {
