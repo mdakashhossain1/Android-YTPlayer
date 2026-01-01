@@ -192,4 +192,6 @@ This repository also includes a pure web version of the player that you can use 
 ![Video Playing](screenshots/app-screen-shoot-video-playing.png)
 
 ## License
-Arknox Technology
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Copyright (c) 2026 Arknox Technology
