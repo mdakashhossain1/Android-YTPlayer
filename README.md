@@ -175,6 +175,9 @@ This repository also includes a pure web version of the player that you can use 
 ![Screen 3](screenshots/screenshot_app_3.png)
 ![Screen 4](screenshots/screenshot_app_4.png)
 ![Screen 5](screenshots/screenshot_app_5.png)
+![App Main](screenshots/app-screen-shoot.png)
+![Video Loaded](screenshots/app-screen-shoot-video-loaded.png)
+![Video Playing](screenshots/app-screen-shoot-video-playing.png)
 
 ## License
 Arknox Technology
