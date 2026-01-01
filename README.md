@@ -33,8 +33,8 @@ dependencyResolutionManagement {
 In your app's `build.gradle`:
 ```gradle
 dependencies {
-    // Replace User/Repo with your GitHub info
-    implementation 'com.github.YourUsername:YourRepository:Tag'
+    // Usage with JitPack
+    implementation 'com.github.mdakashhossain1:Android-YTPlayer:main-SNAPSHOT'
     
     // Required dependency
     implementation 'androidx.webkit:webkit:1.12.1'
