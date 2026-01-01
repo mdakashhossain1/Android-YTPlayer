@@ -63,6 +63,18 @@ Add `YouTubePlayerView` to your layout:
     android:background="#000000" />
 ```
 
+### AndroidManifest.xml (Important)
+
+To handle orientation changes and fullscreen correctly without reloading the video, add `android:configChanges` to your Activity:
+
+```xml
+<activity
+    android:name=".YourActivity"
+    android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+    android:hardwareAccelerated="true"
+    ... />
+```
+
 ### Kotlin Implementation
 
 Initialize and control the player in your Activity/Fragment:
