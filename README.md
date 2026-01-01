@@ -178,15 +178,6 @@ This repository also includes a pure web version of the player that you can use 
 
 ### Screenshots
 
-### Demo
-![Demo](screenshots/screenshot_demo.png)
-
-### Portrait Mode
-![Portrait](screenshots/screenshot_portrait.png)
-
-### Landscape Mode
-![Landscape](screenshots/screenshot_landscape.png)
-
 ### App Screenshots
 ![Screen 1](screenshots/screenshot_app_1.png)
 ![Screen 2](screenshots/screenshot_app_2.png)
