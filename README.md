@@ -34,7 +34,7 @@ In your app's `build.gradle`:
 ```gradle
 dependencies {
     // Usage with JitPack
-    implementation 'com.github.mdakashhossain1:Android-YTPlayer:main-SNAPSHOT'
+    implementation 'com.github.mdakashhossain1:Android-YTPlayer:v1.0.0'
     
     // Required dependency
     implementation 'androidx.webkit:webkit:1.12.1'
