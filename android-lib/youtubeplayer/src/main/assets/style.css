@@ -1,0 +1,274 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Video Input Section */
+        .input-section {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+
+        .input-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 15px;
+            background: #0a0a0a;
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Player Container */
+        .player-wrapper {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+        }
+
+        .player-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        /* Plyr Player Styles */
+        .plyr {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .plyr--youtube {
+            background: #000;
+        }
+
+        /* Presto Player Theme Colors */
+        :root {
+            --plyr-color-main: #3058e5;
+            /* The official Presto Blue */
+            --plyr-video-control-color: #ffffff;
+            --plyr-video-control-background-hover: #3058e5;
+            --presto-radius: 10px;
+        }
+
+        /* Rounded Corners for the Player */
+        .plyr {
+            border-radius: var(--presto-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .plyr--youtube {
+            background: #000;
+        }
+
+        /* ============================================
+           PLYR ENHANCEMENTS for Branding Removal
+           ============================================ */
+
+        /* Force Poster to stay visible on Pause to hide YouTube branding */
+        .plyr--youtube.plyr--paused.plyr__poster-enabled:not(.plyr--stopped) .plyr__poster {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        /* AGGRESSIVE BRANDING REMOVAL: Disable interaction with YouTube iframe */
+        /* This prevents the Title/Share/Channel overlay from appearing on hover */
+        .plyr__video-embed iframe,
+        .plyr__video-wrapper iframe {
+            pointer-events: none;
+            opacity: 0;
+            /* Start hidden to prevent initial flash */
+            transition: opacity 0.5s ease;
+        }
+
+        /* Presto-style Big Play Button */
+        .plyr--video .plyr__control--overlaid {
+            background: rgba(48, 88, 229, 0.9);
+            /* Presto Blue with slight transparency */
+            color: #fff;
+            padding: 25px;
+            /* Bigger button */
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .plyr--video .plyr__control--overlaid:hover {
+            background: #3058e5;
+            /* Solid blue on hover */
+            transform: translate(-50%, -50%) scale(1.1);
+            /* Preserve centering */
+            box-shadow: 0 0 20px rgba(48, 88, 229, 0.6);
+        }
+
+        .plyr--video .plyr__control--overlaid svg {
+            width: 40px;
+            /* Bigger icon */
+            height: 40px;
+        }
+
+        /* Ensure Plyr Controls are always on top */
+        .plyr__controls {
+            z-index: 100 !important;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+        }
+
+        .info-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        .info-box li::before {
+            content: '✓ ';
+            color: #4ade80;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        code {
+            background: #0a0a0a;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #ff6b6b;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .console-box {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin-top: 20px;
+        }
+
+        .console-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .console-box pre {
+            color: #4ade80;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+        }
