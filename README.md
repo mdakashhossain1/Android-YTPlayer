@@ -126,13 +126,13 @@ class MainActivity : AppCompatActivity() {
 ## Screenshots
 
 ### Demo
-![Demo](../screen-shoot/demo.png)
+![Demo](screen-shoot/screenshot_demo.png)
 
 ### Portrait Mode
-![Portrait](../screen-shoot/pose.png)
+![Portrait](screen-shoot/screenshot_portrait.png)
 
 ### Landscape Mode
-![Landscape](../screen-shoot/rotate.png)
+![Landscape](screen-shoot/screenshot_landscape.png)
 
 ## Web Library (HTML/JS)
 
