@@ -123,16 +123,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-## Screenshots
 
-### Demo
-![Demo](screen-shoot/screenshot_demo.png)
-
-### Portrait Mode
-![Portrait](screen-shoot/screenshot_portrait.png)
-
-### Landscape Mode
-![Landscape](screen-shoot/screenshot_landscape.png)
 
 ## Web Library (HTML/JS)
 
