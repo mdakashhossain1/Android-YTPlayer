@@ -178,16 +178,21 @@ This repository also includes a pure web version of the player that you can use 
 
 ### Screenshots
 
-![Demo](screen-shoot/demo.png)
-![Portrait](screen-shoot/pose.png)
-![Landscape](screen-shoot/rotate.png)
+### Demo
+![Demo](screenshots/screenshot_demo.png)
+
+### Portrait Mode
+![Portrait](screenshots/screenshot_portrait.png)
+
+### Landscape Mode
+![Landscape](screenshots/screenshot_landscape.png)
 
 ### App Screenshots
-![Screen 1](screen-shoot/screenshot_app_1.png)
-![Screen 2](screen-shoot/screenshot_app_2.png)
-![Screen 3](screen-shoot/screenshot_app_3.png)
-![Screen 4](screen-shoot/screenshot_app_4.png)
-![Screen 5](screen-shoot/screenshot_app_5.png)
+![Screen 1](screenshots/screenshot_app_1.png)
+![Screen 2](screenshots/screenshot_app_2.png)
+![Screen 3](screenshots/screenshot_app_3.png)
+![Screen 4](screenshots/screenshot_app_4.png)
+![Screen 5](screenshots/screenshot_app_5.png)
 
 ## License
 Arknox Technology
