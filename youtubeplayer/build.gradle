@@ -1,15 +1,22 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.android' version '2.1.0'
     id 'maven-publish'
+}
+
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.7.0'
+    }
 }
 
 android {
     namespace 'com.arknox.youtube'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         minSdk 24
+        // targetSdk is not typically used for library modules, but we focus on compileSdk 36
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -31,9 +38,9 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.webkit:webkit:1.9.0'
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.webkit:webkit:1.12.1'
 }
 
 afterEvaluate {
@@ -43,7 +50,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.mdakashhossain1'
                 artifactId = 'Android-YTPlayer'
-                version = '1.2.3'
+                version = '1.2.4'
             }
         }
     }

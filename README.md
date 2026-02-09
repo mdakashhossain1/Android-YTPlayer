@@ -43,7 +43,7 @@ Add the dependency to your app's **`build.gradle`**:
 
 ```gradle
 dependencies {
-    implementation 'com.github.mdakashhossain1:Android-YTPlayer:v1.2.3'
+    implementation 'com.github.mdakashhossain1:Android-YTPlayer:v1.2.4'
     implementation 'androidx.webkit:webkit:1.12.1' // Required
 }
 ```
