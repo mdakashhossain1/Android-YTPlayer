@@ -1,4 +1,4 @@
 jdk:
   - openjdk17
 install:
-  - cd android-lib && chmod +x gradlew && ./gradlew :youtubeplayer:publishToMavenLocal
+  - gradle :youtubeplayer:publishToMavenLocal
