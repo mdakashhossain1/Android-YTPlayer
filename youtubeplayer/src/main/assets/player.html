@@ -129,25 +129,58 @@
             }
         });
 
+        // Helper to notify Android of events
+        function notifyAndroid(event, data = {}) {
+            if (window.Android && window.Android.onPlayerEvent) {
+                window.Android.onPlayerEvent(event, JSON.stringify(data));
+            }
+        }
+
+        // Add event listeners
+        player.on('ready', (event) => {
+            const videoId = player.source ? player.source : '';
+            notifyAndroid('ready', { videoId: videoId });
+        });
+
+        player.on('playing', (event) => {
+            notifyAndroid('playing', { videoId: player.source });
+        });
+
+        player.on('pause', (event) => {
+            notifyAndroid('paused', { videoId: player.source });
+        });
+
+        player.on('ended', (event) => {
+            notifyAndroid('ended', { videoId: player.source });
+        });
+
+        player.on('error', (event) => {
+            notifyAndroid('error', { message: 'Player error occurred' });
+        });
+
         // Function to extract YouTube Video ID
         function extractVideoId(url) {
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
+            if (!url) return '';
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/|live\/)([^#\&\?]*).*/;
             const match = url.match(regExp);
             return (match && match[2].length === 11) ? match[2] : url; // Return input if it looks like an ID
         }
 
         // Function to load video
-        function loadVideo(id) {
+        function loadVideo(videoIdOrUrl) {
+            const id = extractVideoId(videoIdOrUrl);
             console.log('Loading video:', id);
-            player.source = {
-                type: 'video',
-                sources: [
-                    {
-                        src: id,
-                        provider: 'youtube',
-                    },
-                ],
-            };
+            if (id && id.length === 11) {
+                player.source = {
+                    type: 'video',
+                    sources: [
+                        {
+                            src: id,
+                            provider: 'youtube',
+                        },
+                    ],
+                };
+            }
         }
 
     </script>
