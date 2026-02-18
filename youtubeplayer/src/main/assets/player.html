@@ -36,13 +36,28 @@
             border-bottom-right-radius: inherit;
         }
 
-        /* CSS to hide YouTube Branding */
-        .plyr__video-embed iframe {
+        /* CSS to hide YouTube Branding - only in normal mode, not fullscreen */
+        .plyr:not(.plyr--fullscreen-active) .plyr__video-embed iframe {
             top: -50%;
             height: 200%;
-            /* pointer-events: none; - Enabling pointer events so users can interact if needed, or keep disabled if strict no-interaction is desired. 
-               User asked for "look exactly as older one" but custom. Keeping the crop hack. */
             pointer-events: none;
+        }
+
+        /* Fullscreen mode: maintain aspect ratio without zoom */
+        .plyr--fullscreen-active .plyr__video-embed iframe {
+            top: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+            left: 0 !important;
+            position: absolute !important;
+        }
+
+        /* Ensure fullscreen container maintains aspect ratio */
+        .plyr--fullscreen-active .plyr__video-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
         }
 
         .plyr__video-wrapper {
@@ -67,7 +82,7 @@
     <!-- Plyr Player Container -->
     <div class="plyr__video-embed" id="player">
         <iframe
-            src="https://www.youtube.com/embed/Oke5OqwRFeM?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+            src="https://www.youtube.com/embed/?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
             allowfullscreen allowtransparency allow="autoplay"></iframe>
     </div>
 
