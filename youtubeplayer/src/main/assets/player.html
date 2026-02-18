@@ -180,19 +180,32 @@
             }
         });
 
-        // Function to extract YouTube Video ID
+        // Function to extract YouTube Video ID and check if live stream
         function extractVideoId(url) {
-            if (!url) return '';
+            if (!url) return { id: '', isLive: false };
+
+            // Check if it's a live stream
+            const isLive = url.includes('/live/');
+
+            // Extract video ID
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/|live\/)([^#\&\?]*).*/;
             const match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : url; // Return input if it looks like an ID
+            const id = (match && match[2].length === 11) ? match[2] : url;
+
+            return { id: id, isLive: isLive };
         }
 
-        // Function to load video
+        // Function to load video (supports both regular and live videos)
         function loadVideo(videoIdOrUrl) {
-            const id = extractVideoId(videoIdOrUrl);
-            console.log('Loading video:', id);
+            const { id, isLive } = extractVideoId(videoIdOrUrl);
+            console.log('Loading video:', id, 'Is Live:', isLive);
+
             if (id && id.length === 11) {
+                // For live streams, use additional parameters to ensure compatibility
+                const youtubeParams = isLive
+                    ? { ...player.config.youtube, enablejsapi: 1 }
+                    : player.config.youtube;
+
                 player.source = {
                     type: 'video',
                     sources: [
@@ -202,6 +215,14 @@
                         },
                     ],
                 };
+
+                // For live streams, update Plyr config to handle live playback better
+                if (isLive) {
+                    player.config.youtube = { ...youtubeParams };
+                }
+            } else {
+                console.warn('Invalid video ID:', id);
+                notifyAndroid('error', { message: 'Invalid video ID or URL' });
             }
         }
 
