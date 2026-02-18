@@ -180,32 +180,34 @@
             }
         });
 
-        // Function to extract YouTube Video ID and check if live stream
+        // Function to extract YouTube Video ID (handles URLs and raw IDs)
         function extractVideoId(url) {
-            if (!url) return { id: '', isLive: false };
+            if (!url) return '';
 
-            // Check if it's a live stream
-            const isLive = url.includes('/live/');
-
-            // Extract video ID
+            // Regex pattern to extract video ID from various YouTube URL formats
+            // Supports: youtu.be, youtube.com/v/, youtube.com/watch, shorts, live streams, etc.
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/|live\/)([^#\&\?]*).*/;
             const match = url.match(regExp);
-            const id = (match && match[2].length === 11) ? match[2] : url;
 
-            return { id: id, isLive: isLive };
+            // If regex matches and has valid ID, return it; otherwise return input as-is (it might be a raw ID)
+            if (match && match[2] && match[2].length === 11) {
+                return match[2];
+            }
+
+            // Check if input is already a valid video ID (11 characters, alphanumeric + underscore/dash)
+            if (url && /^[a-zA-Z0-9_-]{11}$/.test(url)) {
+                return url;
+            }
+
+            return '';
         }
 
-        // Function to load video (supports both regular and live videos)
+        // Function to load video (works with both regular and live videos)
         function loadVideo(videoIdOrUrl) {
-            const { id, isLive } = extractVideoId(videoIdOrUrl);
-            console.log('Loading video:', id, 'Is Live:', isLive);
+            const id = extractVideoId(videoIdOrUrl);
+            console.log('Loading video:', id);
 
-            if (id && id.length === 11) {
-                // For live streams, use additional parameters to ensure compatibility
-                const youtubeParams = isLive
-                    ? { ...player.config.youtube, enablejsapi: 1 }
-                    : player.config.youtube;
-
+            if (id) {
                 player.source = {
                     type: 'video',
                     sources: [
@@ -215,14 +217,9 @@
                         },
                     ],
                 };
-
-                // For live streams, update Plyr config to handle live playback better
-                if (isLive) {
-                    player.config.youtube = { ...youtubeParams };
-                }
             } else {
-                console.warn('Invalid video ID:', id);
-                notifyAndroid('error', { message: 'Invalid video ID or URL' });
+                console.warn('Invalid video ID or URL:', videoIdOrUrl);
+                notifyAndroid('error', { message: 'Invalid video ID or URL format' });
             }
         }
 
