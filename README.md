@@ -43,7 +43,7 @@ Add the dependency to your app's **`build.gradle`**:
 
 ```gradle
 dependencies {
-    implementation 'com.github.mdakashhossain1:Android-YTPlayer:v1.0.2'
+    implementation 'com.github.mdakashhossain1:Android-YTPlayer:v1.0.6'  // Latest version with full live stream support
     implementation 'androidx.webkit:webkit:1.12.1' // Required
 }
 ```
@@ -270,6 +270,180 @@ The player uses **Presto Player "YouTube Optimized"** preset:
 - `showinfo: 0` - Hides video title
 - `iv_load_policy: 3` - Hides annotations
 - `noCookie: true` - Privacy-enhanced mode
+
+---
+
+## 🔧 Troubleshooting
+
+### Problem: Video Fails to Load with Error "An error occurred. Please try again later"
+
+**Symptoms:**
+- Error message: "An error occurred. Please try again later (Playback ID: -0y...)"
+- Toast: "Error playing video: Player error occurred"
+- Works intermittently - sometimes requires app restart
+
+**Root Causes:**
+1. Temporary network connectivity issue
+2. YouTube server temporarily unavailable
+3. WebView cache corruption
+4. Video unavailable (private, deleted, region-blocked)
+
+**Solutions (in order):**
+
+✅ **Automatic (Built-in v1.0.6+):**
+- Library automatically retries up to 3 times (2-second delays)
+- WebView cache clears on first error
+- User sees "Retrying video load... (Attempt 1/3)" message
+
+✅ **Manual:**
+1. Go back to video list and try again
+2. Check YouTube video is accessible (not private/deleted)
+3. Clear app cache: Settings → Apps → Your App → Storage → Clear Cache
+4. Check internet connection
+5. Reinstall app if issue persists
+
+---
+
+### Problem: Live Stream Videos Not Playing
+
+**Symptoms:**
+- Live videos show player but don't load
+- Error similar to regular video loading failure
+- Works for regular YouTube videos
+
+**Solution:**
+
+Ensure you're using **v1.0.6 or later**:
+
+```gradle
+dependencies {
+    implementation 'com.github.mdakashhossain1:Android-YTPlayer:v1.0.6'
+    // NOT v1.0.4 or v1.0.5
+}
+```
+
+**What changed:**
+- v1.0.4-1.0.5: Basic live stream support (unreliable)
+- **v1.0.6+**: Full live stream support with automatic retries ✅
+
+**After updating:**
+1. `./gradlew clean build`
+2. Uninstall old app version
+3. Reinstall app
+4. Try playing live stream again
+
+---
+
+### Problem: Video Player Aspect Ratio Issues
+
+**Symptoms:**
+- Video is cut off on sides
+- Video appears stretched
+- Fullscreen looks distorted
+
+**Solution:**
+
+As of v1.0.5+, player height is set to `wrap_content`:
+
+```xml
+<com.arknox.youtube.YouTubePlayerView
+    android:id="@+id/youtubePlayerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"  <!-- Let library calculate -->
+    android:background="#000000" />
+```
+
+The library automatically:
+- Maintains 16:9 aspect ratio
+- Prevents stretching
+- Works in portrait AND landscape
+- No special configuration needed
+
+---
+
+### Problem: Gradle Dependency Resolution Fails
+
+**Error:** "Could not find com.github.mdakashhossain1:Android-YTPlayer..."
+
+**Solution:**
+
+Ensure JitPack repository is in `settings.gradle`:
+
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = 'https://jitpack.io' }  // ✅ MUST BE PRESENT
+    }
+}
+```
+
+Then:
+```bash
+./gradlew clean
+./gradlew build
+```
+
+---
+
+### Problem: Video Reloads on Orientation Change
+
+**Symptoms:**
+- Video restarts when rotating device
+- Watch time resets
+
+**Solution:**
+
+Add `android:configChanges` to your Activity in **AndroidManifest.xml**:
+
+```xml
+<activity
+    android:name=".VideoPlayerActivity"
+    android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+    android:hardwareAccelerated="true">
+</activity>
+```
+
+This prevents Android from destroying/recreating the activity on orientation changes.
+
+---
+
+### Problem: WebView Crashes or Freezes
+
+**Symptoms:**
+- App crashes when opening player
+- Player freezes after loading
+- "WebView Process Crashed" errors
+
+**Solution:**
+
+Update WebKit dependency in `build.gradle`:
+
+```gradle
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'  // Latest version
+    implementation 'androidx.appcompat:appcompat:1.7.0'  // Latest version
+}
+```
+
+Then:
+```bash
+./gradlew clean build
+```
+
+---
+
+## Version Comparison
+
+| Version | Live Streams | Retry Logic | Cache Clearing | Aspect Ratio | Status |
+|---------|--------------|-------------|----------------|--------------|---------|
+| 1.0.4 | ❌ | ❌ | ❌ | Fixed | Deprecated |
+| 1.0.5 | ⚠️ (Buggy) | ❌ | ❌ | Fixed | Deprecated |
+| **1.0.6+** | ✅ | ✅ | ✅ | wrap_content | **Latest** ✅ |
+
+**Recommendation:** Always use **v1.0.6 or higher**
 
 ---
 
