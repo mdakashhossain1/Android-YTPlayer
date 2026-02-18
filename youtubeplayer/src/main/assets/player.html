@@ -37,27 +37,11 @@
         }
 
         /* CSS to hide YouTube Branding - only in normal mode, not fullscreen */
-        .plyr:not(.plyr--fullscreen-active) .plyr__video-embed iframe {
+        .plyr__video-embed iframe {
             top: -50%;
             height: 200%;
             pointer-events: none;
-        }
-
-        /* Fullscreen mode: maintain aspect ratio without zoom */
-        .plyr--fullscreen-active .plyr__video-embed iframe {
-            top: 0 !important;
-            height: 100% !important;
-            width: 100% !important;
-            left: 0 !important;
-            position: absolute !important;
-        }
-
-        /* Ensure fullscreen container maintains aspect ratio */
-        .plyr--fullscreen-active .plyr__video-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
+            transition: all 0.3s ease;
         }
 
         .plyr__video-wrapper {
@@ -171,6 +155,29 @@
 
         player.on('error', (event) => {
             notifyAndroid('error', { message: 'Player error occurred' });
+        });
+
+        // Handle fullscreen changes to fix aspect ratio
+        player.on('enterfullscreen', (event) => {
+            const iframe = document.querySelector('.plyr__video-embed iframe');
+            if (iframe) {
+                iframe.style.top = '0';
+                iframe.style.height = '100%';
+                iframe.style.width = '100%';
+                iframe.style.left = '0';
+                iframe.style.position = 'absolute';
+            }
+        });
+
+        player.on('exitfullscreen', (event) => {
+            const iframe = document.querySelector('.plyr__video-embed iframe');
+            if (iframe) {
+                iframe.style.top = '-50%';
+                iframe.style.height = '200%';
+                iframe.style.width = '';
+                iframe.style.left = '';
+                iframe.style.position = '';
+            }
         });
 
         // Function to extract YouTube Video ID
