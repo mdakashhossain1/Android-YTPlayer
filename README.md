@@ -492,8 +492,8 @@ copies or substantial portions of the Software.
 ## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/mdakashhossain1/Android-YTPlayer/issues)
-- **Email**: support@arknox.com
-- **Website**: [arknox.com](https://arknox.com)
+- **Email**: hossainakash22958@gmail.com
+- **Website**: [arknox.in](https://arknox.in)
 
 ---
 
